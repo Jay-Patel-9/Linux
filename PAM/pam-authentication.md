@@ -121,14 +121,14 @@ With this configuration when any application tried to make authentication PAM de
 
 2. Gentle ( /etc/pam.d/other)
 ```python
-auth	    required	pam_unix.so
-auth	    required	pam_warn.so
-account	    required	pam_unix.so
-account	    required	pam_warn.so
-password	required	pam_deny.so
-password	required	pam_warn.so
-session	    required	pam_unix.so
-session	    required	pam_warn.so
+auth   	  required	pam_unix.so
+auth      required	pam_warn.so
+account	  required	pam_unix.so
+account	  required	pam_warn.so
+password	 required	pam_deny.so
+password	 required	pam_warn.so
+session	  required	pam_unix.so
+session	  required	pam_warn.so
 ```
 - pam_unix.so is uses a traditional authentication by using system's library to retrieve and set account information and authentication. Usually (/etc/passwd & /etc/shadow).
 

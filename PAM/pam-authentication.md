@@ -1,10 +1,12 @@
 # PAM Authentication 
 
-## Introduction
+## Formal Introduction
 PAM stands for Pluggable Authentication Modules and it was first proposed by Sun Microsystems in an Open Software Foundation Request for Comments (RFC) 86.0. PAM first appeared in Red Hat Linux 3.0.4 in August 1996 in the Linux PAM project. PAM is currently supported in the AIX operating system, DragonFly BSD,FreeBSD, HP-UX, Linux, macOS, NetBSD and Solaris.
 
-According to google: PAM is used to perform various types of tasks involving authenticaction, authorization and some modification (for example password change). It allows the system administrator to separate the details of authentication tasks from the applications themselves
+#### In simple words
+Whenever you ask system to make authentication, the request is processed by PAM; The software program which acts as a mediator between OS API and the application to dynamically perform authentication and authorization activities, PAM reads the config file defiened by the application(ex: login) and validates the details based results it allow authentication or logs an error message.
 
+------
 Before PAM applications were solely relied on /etc/passwd and /etc/shadow file to validate the user authentication in other simple words (anyone with valid user and password) was in whitelist. To make any change in authentication was required source code change in the application.
 
 After PAM, applications stopped direct authentication with OS and asked PAM to perform and validate the authentication.
@@ -14,7 +16,7 @@ After PAM, applications stopped direct authentication with OS and asked PAM to p
 Now you might have the basic idea of PAM in the picture. in simple words, PAM provides common authentication scheme with great flexibility and control, which can be used with variety of applications.
 
 #### To check whether the application is PAM Aware use following command:
-> ldd /usr/bin/sshd | grep libpam
+> ldd /usr/bin/login | grep libpam
 
 ![pam-aware-application](https://github.com/Jay-Patel-9/Linux/blob/master/PAM/ldd-example.png)
 
@@ -98,8 +100,8 @@ session         optional        pam_xauth.so #Forwards xauth keys (Also referred
 
 #### Handling exception with pam.d/others
 ##### What happens when PAM doesn't find the config file for application in /etc/pam.d/?
-All the files in /etc/pam.d/ contains the configurations for specific application or service, The exception for this is handled by /etc/pam.d/other. This file contains the configuration for any services which don't have their on configuration file.
-For instance: if the service abc attempted authentication, PAM will look for /etc/pam.d/abc file. failure to do so the authentication for service abc will be determined by /etc/pam.d/others file.
+All the files in /etc/pam.d/ contains the configurations for specific application or service, The exception(when PAM didn't file config for application) is handled by /etc/pam.d/other. This file contains the configuration for any services which don't have their on configuration file.
+For instance: if the service abc attempted authentication, PAM will look for /etc/pam.d/abc file. failure to find that config the authentication for service abc will be determined by /etc/pam.d/others file.
 
 /etc/pam.d/others has two secure configurations one is paranoid and another is quite gentle.
 
@@ -137,7 +139,7 @@ session	  required	pam_warn.so
 This configuration will allow unkown service to authenticate using pam_unix.so module, However it will not allow user to change password. It also logs entry to syslog whenever a service attempts authentication.
 
 #### PAM on OS Hardening
-PAM plays vital role when it comes to User Authentication and Management. PAM can be configured in following ways to Harden Operting System security. 
+PAM plays vital role when it comes to User Authentication and Management. PAM can be configured in following ways to enhance Operating System's security.
 
 1. Password creation requirements. (Password complexity)
 2. Lockout user after x number of failed attempts.

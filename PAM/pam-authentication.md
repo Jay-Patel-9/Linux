@@ -7,16 +7,16 @@ According to google: PAM is used to perform various types of tasks involving aut
 
 Before PAM applications were solely relied on /etc/passwd and /etc/shadow file to validate the user authentication in other simple words (anyone with valid user and password) was in whitelist. To make any change in authentication was required source code change in the application.
 
-Flow: Application(Authentication request) -> Scanning (/etc/passwd for finding user entry) (/etc/shadow for password validation)
-
 After PAM, applications stopped direct authentication with OS and asked PAM to perform and validate the authentication.
 
-Flow: Application(Authentication request) -> PAM Libraries -> OS API's
+![alt](https://github.com/Jay-Patel-9/Linux/blob/master/PAM/before-after-pam.png)
 
 Now you might have the basic idea of PAM in the picture. in simple words, PAM provides common authentication scheme with great flexibility and control, which can be used with variety of applications.
 
 #### To check whether the application is PAM Aware use following command:
 > ldd /usr/bin/sshd | grep libpam
+
+![pam-aware-application](https://github.com/Jay-Patel-9/Linux/blob/master/PAM/ldd-example.png)
 
 ## How PAM is working?
 
@@ -93,6 +93,8 @@ session         include         postlogin # Providing pam modules which are requ
 session         optional        pam_xauth.so #Forwards xauth keys (Also referred to as "cookies") between users.
 ```
 
+![pam-config-flow](https://github.com/Jay-Patel-9/Linux/blob/master/PAM/pam-config-flow.png)
+
 
 #### Handling exception with pam.d/others
 ##### What happens when PAM doesn't find the config file for application in /etc/pam.d/?
@@ -143,4 +145,4 @@ PAM plays vital role when it comes to User Authentication and Management. PAM ca
 4. Strong password hashing algorithm.
 5. Write own PAM module for [custom](http://www.linux-pam.org/Linux-PAM-html/Linux-PAM_MWG.html) requirements.
 
-Reference: [Configure PAM of OS Hardening](http://www.itsecure.hu/library/image/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v2.1.1.pdf)
+Reference: [Configure PAM for OS Hardening](http://www.itsecure.hu/library/image/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v2.1.1.pdf)

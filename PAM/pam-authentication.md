@@ -100,7 +100,7 @@ session         optional        pam_xauth.so #Forwards xauth keys (Also referred
 
 #### Handling exception with pam.d/others
 ##### What happens when PAM doesn't find the config file for the application in /etc/pam.d/?
-All the files in /etc/pam.d/ contains the configurations for specific application or service, The exception(when PAM didn't file config for application) is handled by /etc/pam.d/other. This file contains the configuration for any services which don't have their own configuration file.
+All the files in /etc/pam.d/ contains the configurations for specific application or service. The exception(when PAM didn't file config for application) is handled by /etc/pam.d/other. This file contains the configuration for any services which don't have their own configuration file.
 For instance: if the service abc attempted authentication, PAM will look for /etc/pam.d/abc file. failure to find that config the authentication for service abc will be determined by /etc/pam.d/others file.
 
 /etc/pam.d/others have two secure configurations one is paranoid and another is quite gentle.
@@ -146,7 +146,7 @@ Security point of view PAM functionalities is normally configured by System Admi
 
 ###### Cons:
 - For a normal user, it will be quite tough and hectic to configure PAM.
-- Making changes which user don't understand can may permanently lock the system.
+- Making changes which user don't understand may permanently lock the system.
 
 #### PAM on OS Hardening
 PAM plays a vital role when it comes to User Authentication and Management. PAM can be configured in the following ways to enhance the Operating System's security.

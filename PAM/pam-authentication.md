@@ -146,8 +146,7 @@ Security point of view PAM functionalities is normally configured by System Admi
 
 ###### Cons:
 - For a normal user, it will be quite tough and hectic to configure PAM.
-- Making changes you don't know about can lock your system.
-
+- Making changes which user don't understand can may permanently lock the system.
 
 #### PAM on OS Hardening
 PAM plays a vital role when it comes to User Authentication and Management. PAM can be configured in the following ways to enhance the Operating System's security.
